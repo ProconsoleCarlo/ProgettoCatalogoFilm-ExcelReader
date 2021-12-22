@@ -10,6 +10,9 @@ This project was developed in spare time, between university courses, during fal
 The purpose is to provide a GUI for the catalog of movies that I have seen and that is saved in an xlsx file, with the
 purpose of simplifying the search for the details of the films.
 
+It was written with Java 7, but it still works with Java 17.
+It uses [Apache POI OOXML](https://poi.apache.org/components/spreadsheet/index.html) to manage the xlsx file.
+
 ## Install
 
 ```sh
