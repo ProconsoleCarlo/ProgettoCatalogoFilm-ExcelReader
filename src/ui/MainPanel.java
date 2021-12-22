@@ -36,11 +36,11 @@ public class MainPanel extends JPanel{
 	 */
 	private void realize() {
 		SearchPanel searchPanel = new SearchPanel(language, filmManager);
-		bagBuilder.add(searchPanel, 0, 0, 3, 1, 1, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		bagBuilder.add(searchPanel, 0, 0, 1, 1, 0, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 		
 		viewPanel = new ViewPanel(language, filmManager);
 		viewPanel.setEditable(false);
-		bagBuilder.add(viewPanel, 0, 1, 3, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		bagBuilder.add(viewPanel, 1, 0, 2, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	
 		JButton modifyButton = new JButton(language.get("MainPanelModifyButton"));
 		modifyButton.addActionListener(new ActionListener() {

@@ -14,8 +14,8 @@ import ui.viewFilmData.ViewPanel;
 import ui.viewFilmData.TechnicalPanels.AudioPanel;
 import ui.viewFilmData.TechnicalPanels.OthersDataPanel;
 import ui.viewFilmData.TechnicalPanels.VideoPanel;
-import database.DataDiVisioneECommento;
-import database.IFilm;
+import database.DateAndComments;
+import database.Film;
 import database.TechnicalData;
 
 /**
@@ -55,7 +55,7 @@ import database.TechnicalData;
  * @see ReviewsPanel trovare un modo decente di visualizzare le date di visione con accanto le recensioni
  * 
  * Migliorie future:
- * @see DataDiVisioneECommento il metodo setComment
+ * @see DateAndComments il metodo setComment
  * 
  * BUG:
  * Se aggiungo colonne all'interno del catalogo, il programma scrive i valori dove non vanno
@@ -72,8 +72,8 @@ public class TestMain01 {
 		}
 		FilmManager filmManager = new FilmManager("Catalogo film.xlsx");
 		filmManager.loadDB();
-		Map<String, IFilm> db = filmManager.getDb();
-		for (Map.Entry<String, IFilm> entry  : db.entrySet()) {
+		Map<String, Film> db = filmManager.getDb();
+		for (Map.Entry<String, Film> entry  : db.entrySet()) {
 			System.err.println(entry.getValue());
 		}
 		UILanguage uiLanguage = new UILanguage();

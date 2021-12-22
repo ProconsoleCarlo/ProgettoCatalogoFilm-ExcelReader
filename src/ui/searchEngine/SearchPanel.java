@@ -2,13 +2,16 @@ package ui.searchEngine;
 
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.Map;
+import java.util.Observer;
 
-import javax.swing.JLabel;
+import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -17,7 +20,7 @@ import javax.swing.JTextField;
 import program.FilmManager;
 import utils.GridBagBuilder;
 
-public class SearchPanel extends JPanel {
+public class SearchPanel extends JPanel implements Observer{
 
 	private static final long serialVersionUID = 1L;
 	private GridBagBuilder bagBuilder = new GridBagBuilder(this);
@@ -37,6 +40,7 @@ public class SearchPanel extends JPanel {
 		searchEngine = new SearchEngine(filmManager);
 		realize();
 		this.setMinimumSize(this.getPreferredSize());
+		searchEngine.addObserver(this);
 	}
 	
 	/*
@@ -44,11 +48,8 @@ public class SearchPanel extends JPanel {
 	 * settando come minimumSize quella che setto per ora come preferred
 	 */
 	private void realize() {		
-		JLabel searchLabel = new JLabel(language.get("SearchPanelSearchLabel"));
-		bagBuilder.add(searchLabel, 0, 0, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
-		
 		searchField = new JTextField();
-		searchField.setPreferredSize(new Dimension(100, (int)searchField.getPreferredSize().getHeight()));
+		searchField.setPreferredSize(new Dimension(200, (int)searchField.getPreferredSize().getHeight()));
 		searchField.addKeyListener(new KeyListener() {
 			@Override
 			public void keyTyped(KeyEvent e) {}
@@ -59,13 +60,20 @@ public class SearchPanel extends JPanel {
 			@Override
 			public void keyPressed(KeyEvent e) {}
 		});
-		bagBuilder.add(searchField, 1, 0, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		bagBuilder.add(searchField, 0, 0, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 		
-		JLabel filler1 = new JLabel();
-		bagBuilder.add(filler1, 3, 0, 1, 1, 1, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		JButton advancedSearchButton = new JButton("Advanced search");
+		advancedSearchButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				new AdvancedSearchPanel(searchEngine);
+			}
+		});
+		bagBuilder.add(advancedSearchButton, 1, 0, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 		
 		searchList = new JList<>();
 		JScrollPane searchScrollPane = new JScrollPane(searchList);
+		searchScrollPane.setPreferredSize(new Dimension(300, (int)searchScrollPane.getPreferredSize().getHeight()));
 		searchList.addMouseListener(new MouseListener() {
 			@Override
 			public void mouseReleased(MouseEvent e) {}
@@ -85,13 +93,22 @@ public class SearchPanel extends JPanel {
 				}
 			}
 		});
-		bagBuilder.add(searchScrollPane, 0, 1, 4, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
+		bagBuilder.add(searchScrollPane, 0, 1, 2, 1, 0, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 		update();
 	}
 
-	private void update() {
-		searchResultsList = searchEngine.searchValue(searchField.getText());
+	public void update() {
+		//searchEngine.searchValue(searchField.getText());
+		searchResultsList = searchEngine.getSearchResults();
 		searchList.setListData(searchResultsList.toArray(new String[searchResultsList.size()]));
 		searchList.repaint();
 	}
+
+	@Override
+	public void update(java.util.Observable o, Object arg) {
+		searchResultsList = searchEngine.getSearchResults();
+		searchList.setListData(searchResultsList.toArray(new String[searchResultsList.size()]));
+		searchList.repaint();
+	}
+
 }

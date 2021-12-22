@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class VideoPanel extends JPanel{
 
@@ -36,8 +36,8 @@ public class VideoPanel extends JPanel{
 		bitrateField.setEditable(value);
 		codecField.setEditable(value);
 	}	
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 
 	/*
@@ -79,9 +79,9 @@ public class VideoPanel extends JPanel{
 		codecField.setPreferredSize(new Dimension(100, (int)fpsField.getPreferredSize().getHeight()));
 		bagBuilder.add(codecField, 1, 3, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
-	private void updateFilmData(IFilm selectedFilm) {
+	private void updateFilmData(Film selectedFilm) {
 		resolutionField.setText(selectedFilm.getTechnicalData().getVideoResolution());
-		fpsField.setText(selectedFilm.getTechnicalData().getFpsVideo());
+		fpsField.setText(String.valueOf(selectedFilm.getTechnicalData().getFpsVideo()));
 		bitrateField.setText(String.valueOf(selectedFilm.getTechnicalData().getBitrateVideo()));
 		codecField.setText(selectedFilm.getTechnicalData().getCodecVideo());
 	}
