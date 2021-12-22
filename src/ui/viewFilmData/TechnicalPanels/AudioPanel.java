@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class AudioPanel extends JPanel{
 
@@ -37,8 +37,8 @@ public class AudioPanel extends JPanel{
 		codecField.setEditable(value);
 	}
 	
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 
 	/*
@@ -80,7 +80,7 @@ public class AudioPanel extends JPanel{
 		codecField.setPreferredSize(new Dimension(100, (int)frequencyField.getPreferredSize().getHeight()));
 		bagBuilder.add(codecField, 1, 3, 1, 1, 0, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
-	private void updateFilmData(IFilm selectedFilm) {
+	private void updateFilmData(Film selectedFilm) {
 		bitrateField.setText(String.valueOf(selectedFilm.getTechnicalData().getBitrateAudio()));
 		frequencyField.setText(String.valueOf(selectedFilm.getTechnicalData().getAudioFrequency()));
 		channelsField.setText(String.valueOf(selectedFilm.getTechnicalData().getAudioChannels()));

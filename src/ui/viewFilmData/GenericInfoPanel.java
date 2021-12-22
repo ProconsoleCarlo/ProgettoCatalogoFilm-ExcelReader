@@ -12,7 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class GenericInfoPanel extends JPanel{
 
@@ -40,8 +40,8 @@ public class GenericInfoPanel extends JPanel{
 		durationField.setEditable(value);
 		//TODO genresList
 	}
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 
 	/*
@@ -91,13 +91,13 @@ public class GenericInfoPanel extends JPanel{
 		bagBuilder.add(genresScrollPane, 0, 3, 8, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
 	
-	private void updateFilmData(IFilm selectedFilm) {
-		titleField.setText(selectedFilm.getGenerics().getTitle());
-		yearField.setText(String.valueOf(selectedFilm.getGenerics().getYearOfRelease()));
-		ratingField.setText(String.valueOf(selectedFilm.getGenerics().getRating()));
+	private void updateFilmData(Film film) {
+		titleField.setText(film.getGenericInfos().getTitle());
+		yearField.setText(String.valueOf(film.getGenericInfos().getYearOfRelease()));
+		ratingField.setText(String.valueOf(film.getGenericInfos().getRating()));
 		SimpleDateFormat duration = new SimpleDateFormat("HH:mm:ss");
-		durationField.setText(duration.format(selectedFilm.getGenerics().getDuration()));
-		genresList.setListData(selectedFilm.getGenerics().getGenres().replaceAll(" ", "").split(","));
+		durationField.setText(duration.format(film.getGenericInfos().getDuration()));
+		genresList.setListData(film.getGenericInfos().getGenres().replaceAll(" ", "").split(","));
 		genresList.repaint();
 	}
 }

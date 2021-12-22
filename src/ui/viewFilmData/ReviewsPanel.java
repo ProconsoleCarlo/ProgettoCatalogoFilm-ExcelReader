@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class ReviewsPanel extends JPanel{
 
@@ -32,8 +32,8 @@ public class ReviewsPanel extends JPanel{
 		//TODO reviewsList
 	}
 
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 	
 	/*
@@ -46,17 +46,16 @@ public class ReviewsPanel extends JPanel{
 		
 		reviewsList = new JList<>();
 		JScrollPane reviewsScrollPane = new JScrollPane(reviewsList);
-		//TODO generiList.setListData(lista);
 		bagBuilder.add(reviewsScrollPane, 0, 1, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 		
 		JLabel statisticData = new JLabel(language.get("ReviewsPanelLabelStatistics"));
 		bagBuilder.add(statisticData, 0, 2, 1, 1, 1, 0, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
 	
-	private void updateFilmData(IFilm selectedFilm) {
+	private void updateFilmData(Film selectedFilm) {
 		ArrayList<String> reviewsArray = new ArrayList<>();
 		reviewsArray.clear();
-		Map<Date, String> reviews = selectedFilm.getReviews();
+		Map<Date, String> reviews = selectedFilm.getDateAndComments().getReviews();
 		SimpleDateFormat date = new SimpleDateFormat("dd/MM/yyyy");
 		for (Map.Entry<Date, String> entry  : reviews.entrySet()) {
 			reviewsArray.add(date.format(entry.getKey())+" : "+entry.getValue());

@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.swing.JPanel;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class TechnicalDataPanel extends JPanel{
 
@@ -31,8 +31,8 @@ public class TechnicalDataPanel extends JPanel{
 		othersDataPanel.setEditable(value);
 	}
 	
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 
 	/*
@@ -50,9 +50,9 @@ public class TechnicalDataPanel extends JPanel{
 		othersDataPanel = new OthersDataPanel(language);
 		bagBuilder.add(othersDataPanel, 0, 2, 1, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
-	private void updateFilmData(IFilm selectedFilm) {
-		videoPanel.setSelectedFilm(selectedFilm);
-		audioPanel.setSelectedFilm(selectedFilm);
-		othersDataPanel.setSelectedFilm(selectedFilm);
+	private void updateFilmData(Film film) {
+		videoPanel.setSelectedFilm(film);
+		audioPanel.setSelectedFilm(film);
+		othersDataPanel.setSelectedFilm(film);
 	}
 }

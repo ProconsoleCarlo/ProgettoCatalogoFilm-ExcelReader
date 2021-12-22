@@ -4,12 +4,12 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class DataDiVisioneECommento {
+public class DateAndComments {
 
 	private Date date;
 	private Map<Date, String> reviews = new HashMap<>();
 	
-	protected DataDiVisioneECommento() {
+	protected DateAndComments() {
 		super();
 	}
 	public void setDate(Date date) {

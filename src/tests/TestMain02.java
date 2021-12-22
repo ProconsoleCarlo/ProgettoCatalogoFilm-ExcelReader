@@ -14,7 +14,6 @@ import ui.viewFilmData.ReviewsPanel;
 import ui.viewFilmData.TechnicalPanels.AudioPanel;
 import ui.viewFilmData.TechnicalPanels.OthersDataPanel;
 import ui.viewFilmData.TechnicalPanels.VideoPanel;
-import database.TechnicalData;
 
 /**
  * DIARIO DI SVILUPPO:
@@ -32,13 +31,22 @@ import database.TechnicalData;
  * DONE 18/10/2014	Trovata la libreria sostitutiva: Apache POI
  * DONE 19/10/2014	Sistemazione del programma per la nuova libreria
  * 					Risolto il bug per cui il pannello di ricerca implodeva e quello dei dati esplodeva
+ * 15/11/2014	Rifattorizzato interamente la lettura del database, con la creazione di un interprete decente:
+ * 				ora i valori nulli delle date e delle durate non danno più problemi.
+ * 				Interfaccia grafica messa orizzontale.
+ * 				Ottimizzato il searchEngine
+ * 16/11/2014	Implementata la advancedSearch, con la presenza di molti bug:
+ * 				Bug1: i filtri non vengono applicati in cascata ma singolarmente (fa l'or invece dell'and)
+ * 				Bug2: funziona solo per la ricerca su anno e rating
+ * 				Bug3: la casella di ricerca nel searchPanel non funziona più, bisogna aggiornarla a funzionare con la nuova procedura
+ * 				TODO1: il film deve essere esso stesso una hashMap
+ * 				TODO2: fare la corrispondenza di valori per i criteri di filtro @see AdvancedSearchPanel
  * 
  * WORK IN PROGRESS:
  * Libreria:
  * TODO slegare il programma dalla libreria usata con un adapter
  * 
  * Gestiore degli errori:
- * @see TechnicalData il metodo catchErrors
  * @see ErrorsManager aggiungere i warning e stampare gli errori su un file di log e visualizzarli con una JOptionPane
  * @see FilmManager gestire bene gli errori che possono presentarsi con ErrorsManager
  * 

@@ -12,7 +12,7 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
 import utils.GridBagBuilder;
-import database.IFilm;
+import database.Film;
 
 public class OthersDataPanel extends JPanel{
 
@@ -36,8 +36,8 @@ public class OthersDataPanel extends JPanel{
 		containerField.setEditable(value);
 		technicalNotesArea.setEditable(value);
 	}
-	public void setSelectedFilm(IFilm selectedFilm) {
-		updateFilmData(selectedFilm);
+	public void setSelectedFilm(Film film) {
+		updateFilmData(film);
 	}
 
 	/*
@@ -78,7 +78,7 @@ public class OthersDataPanel extends JPanel{
 		techcnicalNotesScrollPane.setPreferredSize(new Dimension((int)this.getPreferredSize().getWidth(), 100));
 		bagBuilder.add(techcnicalNotesScrollPane, 0, 2, 7, 1, 1, 1, GridBagConstraints.BOTH, GridBagConstraints.CENTER);
 	}
-	private void updateFilmData(IFilm selectedFilm) {
+	private void updateFilmData(Film selectedFilm) {
 		sizeField.setText(String.valueOf(selectedFilm.getTechnicalData().getSize()));
 		containerField.setText(selectedFilm.getTechnicalData().getContainer());
 		technicalNotesArea.setText(selectedFilm.getTechnicalData().getTechnicalNotes());
